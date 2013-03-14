@@ -1,0 +1,178 @@
+﻿if exists (select * from {databaseOwner}{objectQualifier}sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}[donein_redirector_update_trigger]') and OBJECTPROPERTY(id, N'IsTrigger') = 1)
+drop trigger {databaseOwner}{objectQualifier}[donein_redirector_update_trigger]
+GO
+
+if exists (select * from {databaseOwner}{objectQualifier}sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}[donein_redirector_R]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}[donein_redirector_R]
+GO
+
+if exists (select * from {databaseOwner}{objectQualifier}sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}[donein_redirector_CUD]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}[donein_redirector_CUD]
+GO
+
+if exists (select * from {databaseOwner}{objectQualifier}sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}[donein_redirector]') and OBJECTPROPERTY(id, N'IsUserTable') = 1)
+drop table {databaseOwner}{objectQualifier}[donein_redirector]
+GO
+
+CREATE TABLE {databaseOwner}{objectQualifier}[donein_redirector] (
+	[ID] [int] IDENTITY (1, 1) NOT NULL ,
+	[vch_portal_alias] [varchar] (256) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL ,
+	[int_portal_alias_target] [int] NOT NULL ,
+	[int_module] [int] NOT NULL ,
+	[int_author] [int] NOT NULL ,
+	[date_audit_created] [datetime] NOT NULL ,
+	[date_audit_modified] [datetime] NOT NULL 
+) ON [PRIMARY]
+GO
+
+ALTER TABLE {databaseOwner}{objectQualifier}[donein_redirector] WITH NOCHECK ADD 
+	CONSTRAINT [PK_donein_redirector] PRIMARY KEY  CLUSTERED 
+	(
+		[ID]
+	)  ON [PRIMARY] 
+GO
+
+ALTER TABLE {databaseOwner}{objectQualifier}[donein_redirector] ADD 
+	CONSTRAINT [DF_donein_redirector_int_portal_alias_target] DEFAULT (0) FOR [int_portal_alias_target],
+	CONSTRAINT [DF_donein_redirector_int_module] DEFAULT (0) FOR [int_module],
+	CONSTRAINT [DF_donein_redirector_int_author] DEFAULT (0) FOR [int_author],
+	CONSTRAINT [DF_donein_redirector_date_audit_created] DEFAULT (getdate()) FOR [date_audit_created],
+	CONSTRAINT [DF_donein_redirector_date_audit_modified] DEFAULT (getdate()) FOR [date_audit_modified]
+GO
+
+SET QUOTED_IDENTIFIER ON 
+GO
+SET ANSI_NULLS ON 
+GO
+
+
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}donein_redirector_R
+(
+	@int_ID As Integer,
+	@vch_portal_alias As VARCHAR(1024) = '',
+	@int_module As Integer = 0
+
+)
+AS
+
+IF @int_ID > 0
+BEGIN
+	SELECT 
+		TOP 1 * 
+	FROM
+		{databaseOwner}{objectQualifier}donein_redirector
+	WHERE 
+		ID = @int_ID
+END
+
+ELSE
+BEGIN
+	IF @vch_portal_alias = ''
+	BEGIN
+		SELECT 
+			* 
+		FROM
+			{databaseOwner}{objectQualifier}donein_redirector
+		ORDER BY 
+			date_audit_modified DESC
+	END
+
+	ELSE
+	BEGIN
+		SELECT 
+			* 
+		FROM
+			{databaseOwner}{objectQualifier}donein_redirector
+		WHERE
+			vch_portal_alias = @vch_portal_alias
+		ORDER BY 
+			date_audit_modified DESC
+	END
+END
+
+
+GO
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS ON 
+GO
+
+SET QUOTED_IDENTIFIER ON 
+GO
+SET ANSI_NULLS ON 
+GO
+
+
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}donein_redirector_CUD
+(
+	@int_id INTEGER,
+	@vch_portal_alias VARCHAR(1024) = '',
+	@int_portal_alias_target INTEGER = 0,
+	@int_module INTEGER = 0,
+	@int_author INTEGER = 0
+)
+AS
+
+-- CREATE
+IF @int_ID = 0
+BEGIN
+	INSERT INTO  {databaseOwner}{objectQualifier}donein_redirector(vch_portal_alias, int_portal_alias_target, int_module, int_author)
+	VALUES (@vch_portal_alias, @int_portal_alias_target, @int_module, @int_author)
+
+	SELECT SCOPE_IDENTITY()
+END
+
+-- UPDATE
+IF @int_ID > 0
+BEGIN
+	UPDATE
+		{databaseOwner}{objectQualifier}donein_redirector
+	SET
+		vch_portal_alias = @vch_portal_alias,
+		int_portal_alias_target = @int_portal_alias_target,
+		int_module = @int_module,
+		int_author = @int_author
+	WHERE 
+		ID = @int_ID
+
+	SELECT @int_ID
+END
+
+-- DELETE
+IF @int_ID < 0
+BEGIN
+	DELETE
+	FROM
+		{databaseOwner}{objectQualifier}donein_redirector
+	WHERE
+		ID = (@int_ID * -1)
+END
+
+
+GO
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS ON 
+GO
+
+SET QUOTED_IDENTIFIER ON 
+GO
+SET ANSI_NULLS ON 
+GO
+
+CREATE TRIGGER {databaseOwner}{objectQualifier}donein_redirector_update_trigger ON {databaseOwner}{objectQualifier}donein_redirector
+FOR INSERT, UPDATE, DELETE 
+AS
+UPDATE {databaseOwner}{objectQualifier}donein_redirector
+SET date_audit_modified = GetDate() 
+FROM {databaseOwner}{objectQualifier}donein_redirector
+INNER JOIN inserted ON donein_redirector.ID = Inserted.ID;
+
+GO
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS ON 
+GO
+

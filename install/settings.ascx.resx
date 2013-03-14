@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<root>
+	<xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+		<xsd:element name="root" msdata:IsDataSet="true">
+			<xsd:complexType>
+				<xsd:choice maxOccurs="unbounded">
+					<xsd:element name="data">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+								<xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+							</xsd:sequence>
+							<xsd:attribute name="name" type="xsd:string" />
+							<xsd:attribute name="type" type="xsd:string" />
+							<xsd:attribute name="mimetype" type="xsd:string" />
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="resheader">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+							</xsd:sequence>
+							<xsd:attribute name="name" type="xsd:string" use="required" />
+						</xsd:complexType>
+					</xsd:element>
+				</xsd:choice>
+			</xsd:complexType>
+		</xsd:element>
+	</xsd:schema>
+	<resheader name="ResMimeType">
+		<value>text/microsoft-resx</value>
+	</resheader>
+	<resheader name="Version">
+		<value>1.0.0.0</value>
+	</resheader>
+	<resheader name="Reader">
+		<value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+	<resheader name="Writer">
+		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=1.0.5000.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+	
+	<data name="pl_portal_alias_edit.Text">
+		<value>Edit</value>
+	</data>	
+	<data name="pl_portal_alias_delete.Text">
+		<value>Delete</value>
+	</data>	
+
+
+	<data name="pl_portal_alias.Text">
+		<value>Portal Alias</value>
+	</data>	
+	<data name="pl_portal_alias.Help">
+		<value>Select the portal alias that will initiate a redirection.</value>
+	</data>	
+
+
+	<data name="pl_portal_alias_target.Text">
+		<value>Redirection Target</value>
+	</data>	
+	<data name="pl_portal_alias_target.Help">
+		<value>Please select the page that will be loaded when a user requests the portal alias above.</value>
+	</data>	
+
+	<data name="pl_btn_create.Text">
+		<value>Add A New Redirection</value>
+	</data>	
+	<data name="pl_btn_update.Text">
+		<value>Update</value>
+	</data>
+	<data name="pl_btn_cancel.Text">
+		<value>Cancel</value>
+	</data>
+	
+</root>

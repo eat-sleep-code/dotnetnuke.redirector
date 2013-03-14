@@ -1,0 +1,11 @@
+E:\wwwroot\Common\donein.net\Redirector\bin\DONEIN.NET.Redirector.dll
+E:\wwwroot\Common\donein.net\Redirector\bin\DONEIN.NET.Redirector.pdb
+E:\wwwroot\Common\donein.net\Redirector\bin\DONEIN.NET.Redirector.xml
+E:\wwwroot\Common\donein.net\Redirector\obj\Debug\ResolveAssemblyReference.cache
+E:\wwwroot\Common\donein.net\Redirector\obj\Debug\DONEIN_NET.Redirector.Base.resources
+E:\wwwroot\Common\donein.net\Redirector\obj\Debug\Resources.resources
+E:\wwwroot\Common\donein.net\Redirector\obj\Debug\DONEIN_NET.Redirector.Settings.resources
+E:\wwwroot\Common\donein.net\Redirector\obj\Debug\Redirector.vbproj.GenerateResource.Cache
+E:\wwwroot\Common\donein.net\Redirector\obj\Debug\DONEIN.NET.Redirector.dll
+E:\wwwroot\Common\donein.net\Redirector\obj\Debug\DONEIN.NET.Redirector.xml
+E:\wwwroot\Common\donein.net\Redirector\obj\Debug\DONEIN.NET.Redirector.pdb
